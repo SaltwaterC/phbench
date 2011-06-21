@@ -5,7 +5,7 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=<?php echo Kohana::$charset ?>" />
 		<title>phbench v<?php echo $version ?></title>
-		<?php echo HTML::style('includes/css/style.min.css') ?>
+		<?php echo HTML::style('includes/css/style.css') ?>
 	</head>
 	<body>
 		<?php echo View::factory('widgets/menu') ?>
@@ -32,18 +32,15 @@
 				<th>Test</th>
 				<th>Description</th>
 				<th>Time</th>
-				<th>Memory</th>
 			</tr>
 		</table>
 		<br />
 		<table class="tests">
 			<tr>
 				<th>Total Time</th>
-				<th>Total Memory</th>
 			</tr>
 			<tr>
 				<td><span id="time">0 s</span></td>
-				<td><span id="memory">0 B</span></td>
 			</tr>
 		</table>
 		<br />
@@ -55,7 +52,12 @@
 			test by <a href="http://www.saltwaterc.net/">SaltwaterC</a>.
 		</p>
 		
-		<?php echo HTML::script('includes/js/phbench.min.js') ?>
+		<?php
+		echo HTML::script('includes/js/jquery.js');
+		echo HTML::script('includes/js/inflection.js');
+		echo HTML::script('includes/js/convert.js');
+		echo HTML::script('includes/js/phbench.js');
+		?>
 		<script type="text/javascript">
 			var tests_url = '<?php echo URL::site('tests') ?>';
 			var tests_iterations = <?php echo Kohana::config('phbench.iterations') ?>;

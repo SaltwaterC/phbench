@@ -16,7 +16,7 @@
 
 	<meta http-equiv="content-type" content="text/html; charset=<?php echo Kohana::$charset ?>" />
 	<title><?php if ($class !== '') echo $class, ' · ' ?>Codebench</title>
-	<?php echo HTML::style('includes/css/style.min.css') ?>
+	<?php echo HTML::style('includes/css/style.css') ?>
 </head>
 <body>
 	<?php echo View::factory('widgets/menu') ?>
@@ -40,7 +40,7 @@
 
 			<p>
 				<strong>
-					Remember to prefix the methods you want to benchmark with “bench”.<br />
+					Remember to prefix the methods you want to benchmark with "bench".<br />
 					You might also want to overwrite <code>Codebench->method_filter()</code>.
 				</strong>
 			</p>
@@ -121,6 +121,9 @@
 		by <a href="http://www.geertdedeckere.be/article/introducing-codebench">Geert De Deckere</a>.
 	</p>
 	
-	<?php echo HTML::script('includes/js/codebench.min.js') ?>
+	<?php
+	echo HTML::script('includes/js/jquery.js');
+	echo HTML::script('includes/js/codebench.js');
+	?>
 </body>
 </html>

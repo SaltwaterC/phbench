@@ -1,0 +1,1 @@
+This file is here just to keep Git to include this directory to the revision control.

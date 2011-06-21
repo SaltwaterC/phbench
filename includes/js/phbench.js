@@ -10,8 +10,6 @@ var phbench = {
 	
 	time: 0,
 	
-	memory: 0,
-	
 	timeouts: [],
 	
 	results: {},
@@ -24,14 +22,7 @@ var phbench = {
 			url: tests_url,
 			success: function (data) {
 				$.each(data, function (test, info) {
-					$('#tests').append(
-						'<tr><td>' + test + '</td><td>' +
-						info.description + '</td>' +
-						'<td><span id=\'time_' + info.name + 
-						'\'>0 s</span></td>' +
-						'<td><span id=\'memory_' + info.name +
-						'\'>0 B</span></td></tr>'
-					);
+					$('#tests').append('<tr><td>' + test + '</td><td>' + info.description + '</td><td><span id="time_' + info.name + '">0 s</td></tr>');
 				});
 				$('tr:odd').addClass('alt');
 				phbench.data = data;
@@ -44,7 +35,6 @@ var phbench = {
 	
 	run_test: function (test, remaining) {
 		var time = 0;
-		var memory = 0;
 		
 		$.ajax({
 			async: false,
@@ -52,7 +42,6 @@ var phbench = {
 			success: function (data) {
 				if (data.success == true) {
 					time = data.result[0];
-					memory = data.result[1];
 				}
 				else {
 					$('#status').text('failed a test due to response error');
@@ -74,27 +63,16 @@ var phbench = {
 			phbench.time += time;
 			$('#time').text(phbench.time.toFixed(3) + ' s');
 			
-			phbench.memory += memory;
-			$('#memory').text(convert.bytes(phbench.memory));
-			
 			if (phbench.results[test.name] == null) {
-				phbench.results[test.name] = {'time' : time, 'memory' : memory};
+				phbench.results[test.name] = {'time' : time};
 			}
 			else {
 				phbench.results[test.name]['time'] += time;
-				phbench.results[test.name]['memory'] += memory;
 			}
 			
-			$('#time_' +
-				test.name).text(phbench.results[test.name]['time'].toFixed(3) +
-				' s');
-			$('#memory_' + test.name).text(
-				convert.bytes(phbench.results[test.name]['memory'])
-			);
+			$('#time_' + test.name).text(phbench.results[test.name]['time'].toFixed(3) + ' s');
 			
-			$('#log').append('<p class=\'log\'>Executed ' + test.name + ' in ' +
-				time.toFixed(3) + ' seconds, using ' +
-				convert.bytes(memory, true, true) + ' of memory.</p>');
+			$('#log').append('<p class=\'log\'>Executed ' + test.name + ' in ' + time.toFixed(3) + ' seconds</p>');
 			
 			if (phbench.iterate == 0) {
 				$('#status').text('executed all the tests');
@@ -153,13 +131,10 @@ var phbench = {
 		phbench.results = {};
 		phbench.iterate = 0;
 		phbench.time = 0;
-		phbench.memory = 0;
 		$.each(phbench.data, function (key, value) {
 			$('#time_' + value.name).text('0 s');
-			$('#memory_' + value.name).text('0 B');
 		});
 		$('#time').text('0 s');
-		$('#memory').text('0 B');
 		$('#log').text('').append('<p>Log:</p>');
 	}
 	

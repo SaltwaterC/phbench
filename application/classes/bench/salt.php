@@ -2,7 +2,7 @@
 
 class Bench_Salt extends Codebench {
 	
-	public $description = 'Fastest bcrypt salt generator.';
+	public $description = 'Fastest crypt / bcrypt salt generator. As used by <a href="https://github.com/SaltwaterC/PasswordHash2">PasswordHash2</a>';
 	
 	public $subjects;
 	

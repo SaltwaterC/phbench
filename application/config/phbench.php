@@ -2,20 +2,12 @@
 
 return array(
 	
-	'version'      => '0.2',
+	'version'      => '0.2.1',
 	'iterations'   => 10,
 	'loops'        => 2500,
 	'squares'      => 250,
 	'gap'          => 1000,
-	// Runtime check for proper extensions
-	// extension => function
-	'extensions'   => array(
-		'gd'   => 'gd_info',
-		'hash' => 'hash',
-		'json' => 'json_encode',
-		'date' => 'date',
-		'pcre' => 'preg_replace',
-	),
+	
 	// These go straight to the test layout table
 	'runtime_keys' => array(
 		'iterations' => 'Execution times for each test.',
