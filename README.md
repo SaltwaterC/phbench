@@ -31,7 +31,7 @@ It uses just PHP extensions included with the standard PHP distribution, but it 
 
 ## The results
 
-It provides the total execution time for each test, and for all tests. It also provides the standard deviation of the results (theory: http://en.wikipedia.org/wiki/Standard_deviation).
+It provides the total execution time for each test, and for all tests. It also provides the mean value and standard deviation of the results (theory: http://en.wikipedia.org/wiki/Standard_deviation).
 
 ## Options
 
