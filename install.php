@@ -82,7 +82,7 @@ $tests = array(
 	),
 	
 	array(
-		'name' => '>Mbstring Extension Loaded',
+		'name' => 'Mbstring Extension Loaded',
 		'eval' => extension_loaded('mbstring'),
 		'fail' => 'The mbstring extension is not loaded.',
 	),
@@ -90,7 +90,7 @@ $tests = array(
 	array(
 		'name' => 'Mbstring Not Overloaded',
 		'eval' =>  ! (ini_get('mbstring.func_overload') & MB_OVERLOAD_STRING),
-		'fail' => '>The mbstring extension is overloading PHP\'s native string functions.',
+		'fail' => 'The mbstring extension is overloading PHP\'s native string functions.',
 	),
 	
 	array(
@@ -146,6 +146,7 @@ if (sizeof($failures) > 0) :
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
 <head>
 	<title>phbench installation</title>
 	<style type="text/css">
