@@ -22,7 +22,7 @@ var phbench = {
 			url: tests_url,
 			success: function (data) {
 				$.each(data, function (test, info) {
-					$('#tests').append('<tr><td>' + test + '</td><td>' + info.description + '</td><td><span id="time_' + info.name + '">0 s</td></tr>');
+					$('#tests').append('<tr><td>' + test + '</td><td>' + info.description + '</td><td><span id="time_' + info.name + '">0 s</td><td><span id="mean_' + info.name + '">0 s</td><td><span id="stddev_' + info.name + '">0 s</td></tr>');
 				});
 				$('tr:odd').addClass('alt');
 				phbench.data = data;
@@ -133,8 +133,12 @@ var phbench = {
 		phbench.time = 0;
 		$.each(phbench.data, function (key, value) {
 			$('#time_' + value.name).text('0 s');
+			$('#mean_' + value.name).text('0 s');
+			$('#stddev_' + value.name).text('0 s');
 		});
 		$('#time').text('0 s');
+		$('#mean').text('0 s');
+		$('#stddev').text('0 s');
 		$('#log').text('').append('<p>Log:</p>');
 	}
 	

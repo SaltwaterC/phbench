@@ -32,15 +32,21 @@
 				<th>Test</th>
 				<th>Description</th>
 				<th>Time</th>
+				<th>Mean</th>
+				<th>Standard Deviation</th>
 			</tr>
 		</table>
 		<br />
 		<table class="tests">
 			<tr>
 				<th>Total Time</th>
+				<th>Mean</th>
+				<th>Standard Deviation</th>
 			</tr>
 			<tr>
 				<td><span id="time">0 s</span></td>
+				<td><span id="mean">0 s</span></td>
+				<td><span id="stddev">0 s</span></td>
 			</tr>
 		</table>
 		<br />
