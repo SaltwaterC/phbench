@@ -1,8 +1,9 @@
 ## v0.2.1
- * Removes the memory reporting. It proved to be pretty inacurate among various platforms.
+ * Removes the memory reporting. It proved to be pretty inaccurate among various platforms.
  * Made the install process part of the application process. Adds some execution overhead, but this doesn't affect the actual results. On the other hand, it simplifies to minimum the installation.
  * Added the mean value for the results.
  * Added the standard deviation for the results.
+ * Removes the convert.js and inflection.js dependencies.
 
 ## v0.2
  * Added an AJAX driven web UI.

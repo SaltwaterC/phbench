@@ -7,7 +7,6 @@ phbench is a PHP Benchmark Test. It aims to be a complex solution, beyond simple
 ## Requirements
 
 phbench requires PHP 5.2.3+ and some of the extensions that you can find into a pretty standard installation. The application checks itself for the required dependencies. It notifies you if some of the dependencies are missing or if the runtime is improperly configured. It is built on top of Kohana for PHP framework.
-
 ## Installation
 
  * Download the phbench.

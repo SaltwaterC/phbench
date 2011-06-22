@@ -4,15 +4,15 @@ $(document).ready(function () {
 	$('#status').text('page loaded');
 });
 
+var results = {
+	time: 0
+};
+
 var phbench = {
 	
 	data: {},
 	
-	time: 0,
-	
 	timeouts: [],
-	
-	results: {},
 	
 	iterate: 0,
 	
@@ -22,7 +22,7 @@ var phbench = {
 			url: tests_url,
 			success: function (data) {
 				$.each(data, function (test, info) {
-					$('#tests').append('<tr><td>' + test + '</td><td>' + info.description + '</td><td><span id="time_' + info.name + '">0 s</td><td><span id="mean_' + info.name + '">0 s</td><td><span id="stddev_' + info.name + '">0 s</td></tr>');
+					$('#tests').append('<tr><td>' + test + '</td><td>' + info.description + '</td><td><span id="time_' + info.name + '">0 ms</td><td><span id="mean_' + info.name + '">0 ms</td><td><span id="stddev_' + info.name + '">0 ms</td></tr>');
 				});
 				$('tr:odd').addClass('alt');
 				phbench.data = data;
@@ -60,19 +60,43 @@ var phbench = {
 			phbench.iterate--;
 			$('#remaining_tests').text(phbench.iterate);
 			
-			phbench.time += time;
-			$('#time').text(phbench.time.toFixed(3) + ' s');
+			// Global timer
+			results.time += time;
+			$('#time').text(results.time + ' ms');
 			
-			if (phbench.results[test.name] == null) {
-				phbench.results[test.name] = {'time' : time};
+			if ( ! results[test.name]) {
+				results[test.name] = {
+					time: [],
+					timer: 0,
+					mean: 0,
+					stddev: 0
+				};
 			}
-			else {
-				phbench.results[test.name]['time'] += time;
+			
+			// test time
+			results[test.name].timer += time;
+			$('#time_' + test.name).text(results[test.name].timer + ' ms');
+			
+			results[test.name].time.push(time);
+			
+			// test mean
+			var mean = 0;
+			for (var i in results[test.name].time) {
+				mean += results[test.name].time[i];
 			}
+			results[test.name].mean = mean / results[test.name].time.length;
+			$('#mean_' + test.name).text(results[test.name].mean.toFixed(3) + ' ms');
 			
-			$('#time_' + test.name).text(phbench.results[test.name]['time'].toFixed(3) + ' s');
+			// test standard variation
+			var variance = 0;
+			for (var i in results[test.name].time) {
+				variance += Math.pow(results[test.name].time[i] - results[test.name].mean, 2);
+			}
+			variance = variance / results[test.name].time.length;
+			results[test.name].stddev = Math.sqrt(variance);
+			$('#stddev_' + test.name).text(results[test.name].stddev.toFixed(3) + ' ms');
 			
-			$('#log').append('<p class=\'log\'>Executed ' + test.name + ' in ' + time.toFixed(3) + ' seconds</p>');
+			$('#log').append('<p class=\'log\'>Executed ' + test.name + ' in ' + time + ' miliseconds</p>');
 			
 			if (phbench.iterate == 0) {
 				$('#status').text('executed all the tests');
@@ -127,18 +151,20 @@ var phbench = {
 	},
 	
 	reset: function () {
+		results = {
+			time: 0
+		};
+		
 		phbench.timeouts = [];
-		phbench.results = {};
 		phbench.iterate = 0;
-		phbench.time = 0;
 		$.each(phbench.data, function (key, value) {
-			$('#time_' + value.name).text('0 s');
-			$('#mean_' + value.name).text('0 s');
-			$('#stddev_' + value.name).text('0 s');
+			$('#time_' + value.name).text('0 ms');
+			$('#mean_' + value.name).text('0 ms');
+			$('#stddev_' + value.name).text('0 ms');
 		});
-		$('#time').text('0 s');
-		$('#mean').text('0 s');
-		$('#stddev').text('0 s');
+		$('#time').text('0 ms');
+		$('#mean').text('0 ms');
+		$('#stddev').text('0 ms');
 		$('#log').text('').append('<p>Log:</p>');
 	}
 	

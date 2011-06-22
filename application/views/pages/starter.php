@@ -40,13 +40,9 @@
 		<table class="tests">
 			<tr>
 				<th>Total Time</th>
-				<th>Mean</th>
-				<th>Standard Deviation</th>
 			</tr>
 			<tr>
-				<td><span id="time">0 s</span></td>
-				<td><span id="mean">0 s</span></td>
-				<td><span id="stddev">0 s</span></td>
+				<td><span id="time">0 ms</span></td>
 			</tr>
 		</table>
 		<br />
@@ -54,14 +50,12 @@
 		<p id="footer">
 			Page executed in <strong><?php echo round(microtime(TRUE) - KOHANA_START_TIME, 2) ?>&nbsp;s</strong>
 			using <strong><?php echo Text::widont(Text::bytes(memory_get_usage(), 'MB')) ?></strong> of memory.<br />
-			<a href="http://code.google.com/p/phbench/">phbench</a>, a <a href="http://php.net/">PHP</a> benchmark 
-			test by <a href="http://www.saltwaterc.net/">SaltwaterC</a>.
+			<a href="https://github.com/SaltwaterC/phbench">phbench</a>, a <a href="http://php.net/">PHP</a> benchmark 
+			test by <a href="http://www.saltwaterc.eu/">SaltwaterC</a>.
 		</p>
 		
 		<?php
 		echo HTML::script('includes/js/jquery.js');
-		echo HTML::script('includes/js/inflection.js');
-		echo HTML::script('includes/js/convert.js');
 		echo HTML::script('includes/js/phbench.js');
 		?>
 		<script type="text/javascript">

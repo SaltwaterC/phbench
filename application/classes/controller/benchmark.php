@@ -14,6 +14,7 @@ class Controller_Benchmark extends Controller {
 			Profiler::stop($token);
 			$data['output']['success'] = TRUE;
 			$data['output']['result'] = Profiler::total($token);
+			$data['output']['result'][0] = round($data['output']['result'][0] * 1000);
 			Profiler::delete($token);
 		}
 		else
