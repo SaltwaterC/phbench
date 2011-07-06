@@ -7,6 +7,8 @@ class Bench_Crypt extends Codebench {
 	public $description = 'Native vs pure PHP SHA256 crypt().';
 	
 	public $subjects = array();
+
+	public $loops = 100;
 	
 	function __construct()
 	{
