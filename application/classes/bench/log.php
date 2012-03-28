@@ -13,8 +13,8 @@ class Bench_Log extends Codebench {
 		'0.0.0.0 - - [08/Mar/2011:16:09:58 +0000] "GET /id/603695 HTTP/1.1" 403 200 "http://example.com/id/603695" "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "-"',
 		'0.0.0.0 - - [08/Mar/2011:16:09:58 +0000] "GET /id/471343 HTTP/1.0" 206 15710615 "-" "GetRight/6.3e"',
 		'0.0.0.0 - - [08/Mar/2011:16:10:07 +0000] "GET /id/470521 HTTP/1.1" 206 61854 "http://example.com/id/470521" "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)"',
-		'0.0.0.0 - - [08/Mar/2011:16:10:10 +0000] "GET /id/135821 HTTP/1.1" 206 105750989 "-" "GetRight/6.3e"',
-		'0.0.0.0 - - [08/Mar/2011:16:10:11 +0000] "GET /id/470826 HTTP/1.0" 206 192720 "http://example.com/id/470826" "Download Master"',
+		'0.0.0.0 - - [08/Mar/2011:16:10:10 +0000] "GET /id/135821 HTTP/1.1" 206 105750989 "-" "GetRight/6.3e" "0.0.0.0"',
+		'0.0.0.0 - - [08/Mar/2011:16:10:11 +0000] "GET /id/470826 HTTP/1.0" 206 192720 "http://example.com/id/470826" "Download Master" "0.0.0.0, 0.0.0.0"',
 	);
 	
 	public function bench_regex_original($log_entry = '')
@@ -31,18 +31,20 @@ class Bench_Log extends Codebench {
 	{
 		/**
 		 * Changelog & Bug Fixes:
-		 * 
+		 *
 		 * Turned off the greedy matching for the request matching since this
 		 * makes the original regex at least 10 times slower (and increasing for
-		 * longer paths)
-		 * Fixes 400 (bad request) matching
-		 * Uses the D modifier
-		 * Fixes the "might be there" HTTP_X_FORWARDED_FOR
-		 * 
+		 * longer paths).
+		 * Fixes 400 (bad request) matching.
+		 * Uses the D modifier.
+		 * Fixes the "might be there" HTTP_X_FORWARDED_FOR.
+		 * Turned off the greedy matching for referal, user angent, and the
+		 * possible HTTP_X_FORWARDED_FOR.
+		 *
 		 * The expression was validated agains a over 1 milion entries
 		 * production log that's now processed in seconds, not minutes.
 		 */
-		$pattern = '/^([^ ]+) ([^ ]+) ([^ ]+) (\[[^\]]+\]) "(?:(.*?)(?: (.*?) (.*?))?)" ([0-9\-]+) ([0-9\-]+) "(.*)" "(.*)"\s?(?:"(.*)")?$/D';
+		$pattern = '/^([^ ]+) ([^ ]+) ([^ ]+) (\[[^\]]+\]) "(?:(.*?)(?: (.*?) (.*?))?)" ([0-9\-]+) ([0-9\-]+) "(.*?)" "(.*?)"\s?(?:"(.*?)")?$/D';
 		preg_match($pattern, $log_entry, $matches);
 		
 		$size = sizeof($matches);
